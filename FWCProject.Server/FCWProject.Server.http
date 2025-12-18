@@ -1,0 +1,6 @@
+@FCWProject.Server_HostAddress = http://localhost:5112
+
+GET {{FCWProject.Server_HostAddress}}/data/
+Accept: application/json
+
+###
