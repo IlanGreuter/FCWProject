@@ -1,4 +1,5 @@
 ﻿using FCWProject.Database;
+using FCWProject.Util;
 
 namespace FCWProject.API
 {
@@ -26,7 +27,7 @@ namespace FCWProject.API
             if (data.value >= VALUE_ALERT_THRESHOLD)
             {
                 Console.WriteLine($"ALERT: {data.value} exceeded threshold of {VALUE_ALERT_THRESHOLD}.");
-                // todo alert email
+                EmailManager.SendNotification($"ALERT: {data.value} exceeded threshold of {VALUE_ALERT_THRESHOLD}.");
             }
 
             storage.Write(data);

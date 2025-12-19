@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FCWProject.Database
 {
@@ -23,7 +24,7 @@ namespace FCWProject.Database
         public void Write(DataPoint data)
         {
             _storage.Enqueue(data);
-            if (_storage.Count == STORAGE_SIZE)
+            if (_storage.Count > STORAGE_SIZE)
             {
                 // Dequeue and toss the first datapoint to prevent queue from growing too big.
                 _storage.Dequeue();
@@ -35,6 +36,11 @@ namespace FCWProject.Database
         /// </summary>
         /// <param name="amountToRead">Number of datapoints to read</param>
         /// <returns>A list containing the latest datapoints in the storage</returns>
-        public List<DataPoint> GetLatest(int amountToRead) => _storage.TakeLast(amountToRead).ToList();
+        public List<DataPoint> GetLatest(int amountToRead)
+        {
+            var list = _storage.TakeLast(amountToRead > _storage.Count ? _storage.Count : amountToRead).ToList();
+            list.Reverse();
+            return list;
+        }
     }
 }

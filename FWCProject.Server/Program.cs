@@ -13,13 +13,8 @@ namespace FCWProject
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.Services.AddHostedService<APICaller>(_ => new APICaller(responseHandler));
-            // Add services to the container.
-            builder.Services.AddAuthorization();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            app.UseAuthorization();
+            WebApplication app = builder.Build();
 
             app.MapGet("/data", (HttpContext httpContext) =>
             {

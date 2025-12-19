@@ -16,7 +16,6 @@ namespace FCWProject.API
 
         public APICaller(ResponseHandler responseHandler)
         {
-            Console.WriteLine("Start");
             this.responseHandler = responseHandler;
 
             client = new HttpClient();
@@ -29,7 +28,6 @@ namespace FCWProject.API
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                Console.WriteLine("Poll");
                 try
                 {
                     HttpResponseMessage response = await client.GetAsync("data");
